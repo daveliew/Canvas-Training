@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    //*resizing will destory any drawings
-    ctx.fillStyle = "white";
-    ctx.fillRect(10, 10, 150, 150);
+    canvas.height = window.innerHeight; //! resizing will destroy any drawings
   });
-
-  ctx.fillStyle = "white";
-  ctx.fillRect(10, 10, 150, 150);
+  ctx.fillStyle = "blue";
+  ctx.strokeStyle = "red";
+  ctx.lineWidth = 5;
+  ctx.beginPath(); //* like a paint path
+  ctx.arc(100, 100, 50, 0, Math.PI * 2);
+  ctx.stroke();
+  console.log(ctx);
 });
