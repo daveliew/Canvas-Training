@@ -18,12 +18,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
   canvas.addEventListener("click", (event) => {
     mouse.x = event.x;
     mouse.y = event.y;
+
+    drawCircle();
   });
 
-  ctx.fillStyle = "blue";
-  ctx.strokeStyle = "red";
-  ctx.lineWidth = 5;
-  ctx.beginPath(); //* like a paint path
-  ctx.arc(100, 100, 50, 0, Math.PI * 2);
-  ctx.stroke();
+  const drawCircle = () => {
+    ctx.fillStyle = "blue";
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 5;
+    ctx.beginPath(); //* like a paint path
+    ctx.arc(mouse.x, mouse.y, 50, 0, Math.PI * 2);
+    ctx.fill();
+  };
+  drawCircle();
 });
