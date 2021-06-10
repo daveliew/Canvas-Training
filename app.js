@@ -8,11 +8,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight; //! resizing will destroy any drawings
   });
+
+  const mouse = {
+    x: null,
+    y: null,
+  };
+
+  //* passes mouse click coordinates to global variable
+  canvas.addEventListener("click", (event) => {
+    mouse.x = event.x;
+    mouse.y = event.y;
+  });
+
   ctx.fillStyle = "blue";
   ctx.strokeStyle = "red";
   ctx.lineWidth = 5;
   ctx.beginPath(); //* like a paint path
   ctx.arc(100, 100, 50, 0, Math.PI * 2);
   ctx.stroke();
-  console.log(ctx);
 });
