@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
   });
 
   const mouse = {
-    x: null,
-    y: null,
+    x: undefined,
+    y: undefined,
   };
 
   //* passes mouse click coordinates to global variable
@@ -22,12 +22,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
     drawCircle();
   });
 
+  canvas.addEventListener("mousemove", (event) => {
+    mouse.x = event.x;
+    mouse.y = event.y;
+    drawCircle();
+  });
+
   const drawCircle = () => {
     ctx.fillStyle = "blue";
     ctx.strokeStyle = "red";
-    ctx.lineWidth = 5;
+    ctx.lineWidth = 2;
     ctx.beginPath(); //* like a paint path
-    ctx.arc(mouse.x, mouse.y, 50, 0, Math.PI * 2);
+    ctx.arc(mouse.x, mouse.y, 10, 0, Math.PI * 2);
     ctx.fill();
   };
   drawCircle();
