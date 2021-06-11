@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   const ctx = canvas.getContext("2d"); //* add context via ctx
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  const particleArray = [];
+  const particlesArray = [];
 
   window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
@@ -19,31 +19,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
   // ctx.fillStyle = `"rgb(${r}, ${g}, ${b})"`;
   console.log(r, g, b);
 
-  // const mouse = {
-  //   x: undefined,
-  //   y: undefined,
-  // };
-
-  //* passes mouse click coordinates to global variable
-  // canvas.addEventListener("click", (event) => {
-  //   mouse.x = event.x;
-  //   mouse.y = event.y;
-  //   drawCircle();
-  // });
-
-  // canvas.addEventListener("mousemove", (event) => {
-  //   mouse.x = event.x;
-  //   mouse.y = event.y;
-  //   drawCircle();
-  // });
-
   class Particle {
     constructor() {
-      // this.x = mouse.x;
-      // this.y = mouse.y;
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 15 + 1;
+      this.x = mouse.x;
+      this.y = mouse.y;
+      // this.x = Math.random() * canvas.width;
+      // this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 10 + 1;
       this.speedX = Math.random() * 3 - 1.5; //* create -ve and +ve vector
       this.speedY = Math.random() * 3 - 1.5;
     }
@@ -62,9 +44,34 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 
+  //* Mouse Movements
+
+  const mouse = {
+    x: undefined,
+    y: undefined,
+  };
+
+  //* passes mouse click coordinates to global variable
+  canvas.addEventListener("click", (event) => {
+    mouse.x = event.x;
+    mouse.y = event.y;
+    for (let i = 0; i < 10; i++) {
+      particlesArray.push(new Particle());
+    }
+  });
+
+  canvas.addEventListener("mousemove", (event) => {
+    mouse.x = event.x;
+    mouse.y = event.y;
+    for (let i = 0; i < 3; i++) {
+      particlesArray.push(new Particle());
+    }
+  });
+
+  //* Generate Particles
   const init = () => {
     for (let i = 0; i < 100; i++) {
-      particleArray.push(new Particle());
+      particlesArray.push(new Particle());
     }
   };
 
@@ -85,8 +92,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
   //* Animate generations
 
   const animate = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    handleParticles(particleArray);
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(0,0,0,0.1)"; // rectangle that covers screen over and over
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    handleParticles(particlesArray);
     requestAnimationFrame(animate);
   };
   animate();
