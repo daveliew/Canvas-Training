@@ -4,20 +4,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const particlesArray = [];
+  let hue = 0;
 
   window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight; //! resizing will destroy any drawings
   });
-
-  let r = Math.floor(Math.random() * 255);
-  let g = Math.floor(Math.random() * 255);
-  let b = Math.floor(Math.random() * 255);
-  // let r = Math.floor(Math.random() * 255);
-  // let g = Math.floor(Math.random() * 255);
-  // let b = Math.floor(Math.random() * 255);
-  // ctx.fillStyle = `"rgb(${r}, ${g}, ${b})"`;
-  console.log(r, g, b);
 
   class Particle {
     constructor() {
@@ -37,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     draw() {
-      ctx.fillStyle = "blue";
+      ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
       ctx.beginPath(); //* like a paint path
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
@@ -96,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     ctx.fillStyle = "rgba(0,0,0,0.1)"; // rectangle that covers screen over and over
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     handleParticles(particlesArray);
+    hue++;
     requestAnimationFrame(animate);
   };
   animate();
